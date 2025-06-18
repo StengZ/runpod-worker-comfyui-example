@@ -1,0 +1,537 @@
+{
+  "1": {
+    "inputs": {
+      "image": "human.jpg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "2": {
+    "inputs": {
+      "task": "more detailed caption",
+      "text_input": "describe the image and great detail, as if you were explaining it to a blind person. Ensure you are focus on every detail of the image including the subject, their clothing, the environment, and finer details about the image itself",
+      "max_new_tokens": 1024,
+      "num_beams": 3,
+      "do_sample": false,
+      "fill_mask": false,
+      "florence2_model": [
+        "3",
+        0
+      ],
+      "image": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: Florence2Image2Prompt",
+    "_meta": {
+      "title": "图层工具：Florence2 图像转提示（高级）"
+    }
+  },
+  "3": {
+    "inputs": {
+      "version": "large-PromptGen-v2.0"
+    },
+    "class_type": "LayerMask: LoadFlorence2Model",
+    "_meta": {
+      "title": "图层遮罩：加载Florence2模型（高级）"
+    }
+  },
+  "4": {
+    "inputs": {
+      "text_0": "A portrait of a young woman with long brown hair and freckles, smiling at the camera. she is positioned in the middle of the image, wearing a beige blazer over a dark blue top. the background is blurred, with green and yellow leaves visible, suggesting a natural setting. the woman appears to be in her early twenties, with fair skin and brown eyes, and is looking directly at the viewer with a slight smile. her hair is styled in loose waves, and she has a mole on her cheek. the lighting is soft and natural, coming from the left side of her face, creating a natural and serene atmosphere. the image is a close-up, focusing on her face and upper body, making it a high-quality and professional portrait.",
+      "text": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "5": {
+    "inputs": {
+      "part1": [
+        "4",
+        0
+      ],
+      "part2": "and realistic skin tones, imperfections and visible pores, photorealistic, soft diffused lighting, subsurface scattering, hyper-detailed shading, dynamic shadows, 8K resolution, cinematic lighting, masterpiece, intricate details, shot on a DSLR with a 50mm lens.",
+      "part3": "",
+      "part4": "",
+      "separator": " "
+    },
+    "class_type": "CR Combine Prompt",
+    "_meta": {
+      "title": "⚙️ CR Combine Prompt"
+    }
+  },
+  "6": {
+    "inputs": {
+      "seed": 471972312862058,
+      "steps": 40,
+      "cfg": 6,
+      "sampler_name": "dpmpp_2m_sde",
+      "scheduler": "karras",
+      "denoise": 0.25000000000000006,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "11",
+        0
+      ],
+      "negative": [
+        "12",
+        0
+      ],
+      "latent_image": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "7": {
+    "inputs": {
+      "ckpt_name": "illustriousRealismBy_v10VAE.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint加载器（简易）"
+    }
+  },
+  "8": {
+    "inputs": {
+      "lora_name": "ILXL_Realism_Slider_V.1.safetensors",
+      "strength_model": 1.8000000000000003,
+      "strength_clip": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "clip": [
+        "7",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "加载LoRA"
+    }
+  },
+  "9": {
+    "inputs": {
+      "lora_name": "RealSkin_xxXL_v1.safetensors",
+      "strength_model": 2.4000000000000004,
+      "strength_clip": 1,
+      "model": [
+        "8",
+        0
+      ],
+      "clip": [
+        "8",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "加载LoRA"
+    }
+  },
+  "11": {
+    "inputs": {
+      "text": [
+        "5",
+        0
+      ],
+      "clip": [
+        "9",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "12": {
+    "inputs": {
+      "text": "(3d, render, cgi, doll, painting, fake, cartoon, 3d modeling:1.4), (worst quality, low quality:1.4), monochrome, deformed, malformed, deformed face, bad teeth, bad hands, bad fingers, bad eyes, long body, blurry, duplicate, cloned, duplicate body parts, disfigured, extra limbs, fused fingers, extra fingers, twisted, distorted, malformed hands, mutated hands and fingers, conjoined, missing limbs, bad anatomy, bad proportions, logo, watermark, text, copyright, signature, lowres, mutated, mutilated, artifacts, gross, ugly, (adult:1.5), (mature features:1.5)",
+      "clip": [
+        "9",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "13": {
+    "inputs": {
+      "samples": [
+        "6",
+        0
+      ],
+      "vae": [
+        "7",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "14": {
+    "inputs": {
+      "pixels": [
+        "1",
+        0
+      ],
+      "vae": [
+        "7",
+        2
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE编码"
+    }
+  },
+  "15": {
+    "inputs": {
+      "samples": [
+        "14",
+        0
+      ],
+      "mask": [
+        "60",
+        0
+      ]
+    },
+    "class_type": "SetLatentNoiseMask",
+    "_meta": {
+      "title": "设置Latent噪波遮罩"
+    }
+  },
+  "29": {
+    "inputs": {
+      "guide_size": 512,
+      "guide_size_for": true,
+      "max_size": 1024,
+      "seed": 315597695763353,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 0.12000000000000002,
+      "feather": 5,
+      "noise_mask": true,
+      "force_inpaint": true,
+      "bbox_threshold": 0.5,
+      "bbox_dilation": 10,
+      "bbox_crop_factor": 3,
+      "sam_detection_hint": "center-1",
+      "sam_dilation": 0,
+      "sam_threshold": 0.93,
+      "sam_bbox_expansion": 0,
+      "sam_mask_hint_threshold": 0.7,
+      "sam_mask_hint_use_negative": "False",
+      "drop_size": 10,
+      "wildcard": "",
+      "cycle": 1,
+      "inpaint_model": false,
+      "noise_mask_feather": 20,
+      "tiled_encode": false,
+      "tiled_decode": false,
+      "image": [
+        "13",
+        0
+      ],
+      "model": [
+        "31",
+        0
+      ],
+      "clip": [
+        "32",
+        0
+      ],
+      "vae": [
+        "33",
+        0
+      ],
+      "positive": [
+        "34",
+        0
+      ],
+      "negative": [
+        "30",
+        0
+      ],
+      "bbox_detector": [
+        "35",
+        0
+      ]
+    },
+    "class_type": "FaceDetailer",
+    "_meta": {
+      "title": "FaceDetailer"
+    }
+  },
+  "30": {
+    "inputs": {
+      "text": "detailed and intricate skin features, 4k, ultra hd, high quality, macro details",
+      "clip": [
+        "32",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "31": {
+    "inputs": {
+      "unet_name": "flux1-dev-Q5_0.gguf"
+    },
+    "class_type": "UnetLoaderGGUF",
+    "_meta": {
+      "title": "Unet Loader (GGUF)"
+    }
+  },
+  "32": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "双CLIP加载器"
+    }
+  },
+  "33": {
+    "inputs": {
+      "vae_name": "flux_fill_ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "34": {
+    "inputs": {
+      "guidance": 3.5,
+      "conditioning": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "Flux引导"
+    }
+  },
+  "35": {
+    "inputs": {
+      "model_name": "segm/face_yolov8m.pt"
+    },
+    "class_type": "UltralyticsDetectorProvider",
+    "_meta": {
+      "title": "UltralyticsDetectorProvider"
+    }
+  },
+  "52": {
+    "inputs": {
+      "device": "cuda"
+    },
+    "class_type": "FaceParsingModelLoader(FaceParsing)",
+    "_meta": {
+      "title": "FaceParsingModelLoader(FaceParsing)"
+    }
+  },
+  "53": {
+    "inputs": {},
+    "class_type": "FaceParsingProcessorLoader(FaceParsing)",
+    "_meta": {
+      "title": "FaceParsingProcessorLoader(FaceParsing)"
+    }
+  },
+  "54": {
+    "inputs": {
+      "model": [
+        "52",
+        0
+      ],
+      "processor": [
+        "53",
+        0
+      ],
+      "image": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "FaceParse(FaceParsing)",
+    "_meta": {
+      "title": "FaceParse(FaceParsing)"
+    }
+  },
+  "55": {
+    "inputs": {
+      "background": false,
+      "skin": false,
+      "nose": false,
+      "eye_g": true,
+      "r_eye": true,
+      "l_eye": true,
+      "r_brow": false,
+      "l_brow": false,
+      "r_ear": false,
+      "l_ear": false,
+      "mouth": false,
+      "u_lip": true,
+      "l_lip": true,
+      "hair": false,
+      "hat": false,
+      "ear_r": false,
+      "neck_l": false,
+      "neck": false,
+      "cloth": true,
+      "result": [
+        "54",
+        1
+      ]
+    },
+    "class_type": "FaceParsingResultsParser(FaceParsing)",
+    "_meta": {
+      "title": "FaceParsingResultsParser(FaceParsing)"
+    }
+  },
+  "56": {
+    "inputs": {
+      "mask": [
+        "68",
+        0
+      ]
+    },
+    "class_type": "MaskToImage",
+    "_meta": {
+      "title": "遮罩转换为图像"
+    }
+  },
+  "59": {
+    "inputs": {
+      "op": "difference",
+      "clamp_result": "yes",
+      "round_result": "no",
+      "image1": [
+        "62",
+        0
+      ],
+      "image2": [
+        "56",
+        0
+      ]
+    },
+    "class_type": "Combine Masks",
+    "_meta": {
+      "title": "Combine Masks"
+    }
+  },
+  "60": {
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "59",
+        0
+      ]
+    },
+    "class_type": "ImageToMask",
+    "_meta": {
+      "title": "图像转换为遮罩"
+    }
+  },
+  "62": {
+    "inputs": {
+      "mask": [
+        "64",
+        1
+      ]
+    },
+    "class_type": "MaskToImage",
+    "_meta": {
+      "title": "遮罩转换为图像"
+    }
+  },
+  "64": {
+    "inputs": {
+      "face": true,
+      "hair": true,
+      "body": true,
+      "clothes": false,
+      "accessories": false,
+      "background": false,
+      "confidence": 0.20000000000000004,
+      "detail_method": "VITMatte(local)",
+      "detail_erode": 6,
+      "detail_dilate": 6,
+      "black_point": 0.010000000000000002,
+      "white_point": 0.99,
+      "process_detail": true,
+      "device": "cuda",
+      "max_megapixels": 2,
+      "images": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "LayerMask: PersonMaskUltra V2",
+    "_meta": {
+      "title": "图层遮罩：人物遮罩 Ultra V2（高级）"
+    }
+  },
+  "68": {
+    "inputs": {
+      "expand": 15,
+      "incremental_expandrate": 0,
+      "tapered_corners": true,
+      "flip_input": false,
+      "blur_radius": 4,
+      "lerp_alpha": 1,
+      "decay_factor": 1,
+      "fill_holes": false,
+      "mask": [
+        "55",
+        0
+      ]
+    },
+    "class_type": "GrowMaskWithBlur",
+    "_meta": {
+      "title": "Grow Mask With Blur"
+    }
+  },
+  "203": {
+    "inputs": {
+      "filename_prefix": "RealSkin AI Light Final Resized to Original Scale",
+      "images": [
+        "29",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  }
+}
