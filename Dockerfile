@@ -150,6 +150,32 @@ RUN git clone https://github.com/BadCafeCode/masquerade-nodes-comfyui.git /comfy
 RUN git clone https://github.com/chflame163/ComfyUI_LayerStyle_Advance.git /comfyui/custom_nodes/ComfyUI_LayerStyle_Advance
 RUN git clone https://github.com/Ryuukeisyou/comfyui_face_parsing.git /comfyui/custom_nodes/comfyui_face_parsing
 
+RUN wget -O /comfyui/models/clip/t5xxl_fp8_e4m3fn.safetensors https://huggingface.co/sTzing/t5xxl/resolve/main/t5xxl_fp8_e4m3fn.safetensors
+RUN wget -O /comfyui/models/clip/clip_l.safetensors https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors
+
+RUN wget -O /comfyui/models/vae/flux_fill_ae.safetensors https://huggingface.co/zw2013/fill_vae/resolve/main/flux_fill_ae.safetensors
+
+RUN wget -O /comfyui/models/checkpoints/illustriousRealismBy_v10VAE.safetensors https://huggingface.co/ExistentialC/illustrious-realism/resolve/main/illustriousRealismBy_v10VAE.safetensors
+
+RUN wget -O /comfyui/models/loras/ILXL_Realism_Slider_V.1.safetensors https://huggingface.co/casque/ILXL_Realism_Slider_V.1/resolve/main/ILXL_Realism_Slider_V.1.safetensors
+RUN wget -O /comfyui/models/loras/RealSkin_xxXL_v1.safetensors https://huggingface.co/casque/RealSkin_xxXL_v1/resolve/main/RealSkin_xxXL_v1.safetensors
+
+RUN wget -O /comfyui/models/unet/flux1-dev-Q5_0.gguf https://huggingface.co/city96/FLUX.1-dev-gguf/resolve/main/flux1-dev-Q5_0.gguf
+RUN wget -O /comfyui/models/ultralytics/segm/face_yolov8m.pt https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt
+
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/added_tokens.json https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/added_tokens.json
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/config.json https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/config.json
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/configuration_florence2.py https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/configuration_florence2.py
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/generation_config.json https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/generation_config.json
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/model.safetensors https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/model.safetensors
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/modeling_florence2.py https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/modeling_florence2.py
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/preprocessor_config.json https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/preprocessor_config.json
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/processing_florence2.py https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/processing_florence2.py
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/special_tokens_map.json https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/special_tokens_map.json
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/tokenizer.json https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/tokenizer.json
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/tokenizer_config.json https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/tokenizer_config.json
+RUN wget -O /comfyui/models/florence2/large-PromptGen-v2.0/vocab.json https://huggingface.co/chflame163/ComfyUI_LayerStyle/resolve/main/ComfyUI/models/florence2/large-PromptGen-v2.0/vocab.json
+
 
 # Go back to the root
 WORKDIR /
